@@ -5,7 +5,10 @@ function main() {
   // alert(coef);
   console.log(coef);
   let roots = new Set(solve(coef.a, coef.b, coef.c));
-  // alert("Roots:");
+  if (roots.size == 0) alert("There are no roots");
+  else {
+    alert("Roots:");
+  }
   roots.forEach(alert);
   roots.add(0);
   console.log("roots");
