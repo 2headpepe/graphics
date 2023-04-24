@@ -2,8 +2,11 @@ main();
 function main() {
   const coef = getCoef();
   console.log("coef");
+  // alert(coef);
   console.log(coef);
   let roots = new Set(solve(coef.a, coef.b, coef.c));
+  // alert("Roots:");
+  roots.forEach(alert);
   roots.add(0);
   console.log("roots");
   console.log(roots);
@@ -80,15 +83,18 @@ function getCoef() {
     ""
   );
   if (ans != "y") {
-    return {
+    let coef = {
       a: Math.random() * 100 - 50,
       b: Math.random() * 100 - 50,
       c: Math.random() * 100 - 50,
     };
+    for (let e in coef) alert(`${e} : ` + coef[e]);
+    return coef;
   } else {
     a = +prompt("okay! Enter first coefficient!", 0);
     b = +prompt("Enter second coefficient!", 0);
     c = +prompt("Enter third coefficient!", 0);
+
     return { a, b, c };
   }
 }
