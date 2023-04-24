@@ -103,6 +103,7 @@ function solve(a, b, c) {
   if (D == 0) return [-b / 2 / a];
   return [(-b + Math.sqrt(D)) / 2 / a, (-b - Math.sqrt(D)) / 2 / a];
 }
+
 /**Get border of graph
  * @param {Array} roots - roots of ax^2 + bx + c = 0
  * @param {Object} coef - object with coefficients a:Number,b:Number,c:Number
@@ -178,6 +179,11 @@ function getCellSize(leftX, rightX, bottomY, topY) {
   tmpSize *= scale;
   return tmpSize;
 }
+/** Function that returns scale of cells in graph
+ * @param {Number} leftX - left border
+ * @param {Number} rightX - right border
+ * @returns
+ */
 function getScale(leftX, rightX) {
   let dif = rightX - leftX;
 
@@ -188,6 +194,7 @@ function getScale(leftX, rightX) {
  * @param {Number} cellSize - Size of cell
  * @param {Number} leftX -  left border
  * @param {Number} topY - top border
+ * @param {Number} scale - scale of cells
  * @returns {Object} X and Y coordinates of center
  */
 function getCenterCoordinates(cellSize, leftX, topY, scale) {
@@ -201,6 +208,7 @@ function getCenterCoordinates(cellSize, leftX, topY, scale) {
  * @param {Number} rightX - right border
  * @param {Number} bottomY - bottom border
  * @param {Number} topY - top border
+ * @param {Number} scale - scale of cells
  * @param {Object} coordinatesCenter object with X and Y coordinates of center
  */
 function drawCoordinateLines(
@@ -304,6 +312,11 @@ function drawCoordinateLines(
     ++i;
   }
 }
+/** Returns the function value at the specified point
+ * @param {Number} coef - object with coefs
+ * @param {Number} x - the argument
+ * @returns {Number} - function value
+ */
 function f(coef, x) {
   return coef.a * x * x + coef.b * x + coef.c;
 }
@@ -315,6 +328,7 @@ function f(coef, x) {
  * @param {Number} rightX - right border
  * @param {Number} bottomY - bottom border
  * @param {Number} topY - top border
+ * @param {Number} scale - scale of cells
  */
 function drawFunc(coef, cellSize, ctx, leftX, rightX, bottomY, topY, scale) {
   // console.log([coef, ctx, cellSize, leftX, bottomY, topY, rightX]);
@@ -360,6 +374,7 @@ function drawFunc(coef, cellSize, ctx, leftX, rightX, bottomY, topY, scale) {
  * @param {Number} coordinateY -  Y coordinate to convert
  * @param {Number} leftX -  left border
  * @param {Number} topY - top border
+ * @param {Number} scale - scale of cells
  * @returns {Object} X and Y coordinates
  */
 function changeCoordinates(
