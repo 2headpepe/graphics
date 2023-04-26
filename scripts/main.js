@@ -1,15 +1,62 @@
-main();
-function main() {
-  const coef = getCoef();
+const submit_button = document.querySelector("#submit-button");
+submit_button.addEventListener("click", getCoef);
+const random_button = document.querySelector("#random-button");
+random_button.addEventListener("click", randomCoef);
+function getCoef() {
+  const a = document.getElementById("input_a");
+  a.style.border = "1px solid green";
+  const b = document.getElementById("input_b");
+  b.style.border = "1px solid green";
+  const c = document.getElementById("input_c");
+  c.style.border = "1px solid green";
+
+  // let notNumValue = {};
+  // while (!isFinite(a.value) || !isFinite(b.value) || !isFinite(c.value)) {
+  let flag = false;
+  if (!isFinite(a.value)) {
+    a.style.border = "1px solid red";
+    flag = 1;
+  }
+  if (!isFinite(b.value)) {
+    flag = 1;
+    b.style.border = "1px solid red";
+  }
+  if (!isFinite(c.value)) {
+    c.style.border = "1px solid red";
+    flag = 1;
+  } // }
+  if (!flag) main({ a: +a.value, b: +b.value, c: +c.value });
+}
+
+function randomCoef() {
+  let coef = {
+    a: Math.random() * 100 - 50,
+    b: Math.random() * 100 - 50,
+    c: Math.random() * 100 - 50,
+  };
+  for (let e in coef) alert(`${e} : ` + coef[e]);
+  main(coef);
+}
+//.addEventListener("click", newF());
+// alert(tmp);
+// main();
+function main(coef) {
+  // const coef = getCoef();
   console.log("coef");
   // alert(coef);
   console.log(coef);
   let roots = new Set(solve(coef.a, coef.b, coef.c));
-  if (roots.size == 0) alert("There are no roots");
+  let rootsStr = "";
+  if (roots.size == 0) rootsStr = "No roots";
   else {
-    alert("Roots:");
+    rootsStr = `The equation has ${roots.size} roots: `;
+    for (e of roots) {
+      rootsStr += e + " ";
+    }
   }
-  roots.forEach(alert);
+  document.getElementById("roots").innerHTML = rootsStr;
+
+  // roots.forEach(alert);
   roots.add(0);
   console.log("roots");
   console.log(roots);
@@ -76,31 +123,31 @@ function main() {
 /** Function for user input coefs
  * @returns {Object} object with coefficients a:Number,b:Number,c:Number
  */
-function getCoef() {
-  // let a = +prompt("Input a: ", 0);
-  // let b = +prompt("Input b: ", 0);
-  // let c = +prompt("Input c: ", 0);
-  let ans = prompt(
-    `Enter "y" if you want enter coefficients
-(by default it is random values from -50 to 50)`,
-    ""
-  );
-  if (ans != "y") {
-    let coef = {
-      a: Math.random() * 100 - 50,
-      b: Math.random() * 100 - 50,
-      c: Math.random() * 100 - 50,
-    };
-    for (let e in coef) alert(`${e} : ` + coef[e]);
-    return coef;
-  } else {
-    a = +prompt("okay! Enter first coefficient!", 0);
-    b = +prompt("Enter second coefficient!", 0);
-    c = +prompt("Enter third coefficient!", 0);
+// function getCoef() {
+//   // let a = +prompt("Input a: ", 0);
+//   // let b = +prompt("Input b: ", 0);
+//   // let c = +prompt("Input c: ", 0);
+//   let ans = prompt(
+//     `Enter "y" if you want enter coefficients
+// (by default it is random values from -50 to 50)`,
+//     ""
+//   );
+//   if (ans != "y") {
+//     let coef = {
+//       a: Math.random() * 100 - 50,
+//       b: Math.random() * 100 - 50,
+//       c: Math.random() * 100 - 50,
+//     };
+//     for (let e in coef) alert(`${e} : ` + coef[e]);
+//     return coef;
+//   } else {
+//     a = +prompt("okay! Enter first coefficient!", 0);
+//     b = +prompt("Enter second coefficient!", 0);
+//     c = +prompt("Enter third coefficient!", 0);
 
-    return { a, b, c };
-  }
-}
+//     return { a, b, c };
+//   }
+// }
 
 /**Function for solving quadratic equation: ax^2 + bx + c = 0
  * @returns {Array} Roots
@@ -370,6 +417,8 @@ function drawFunc(coef, cellSize, ctx, leftX, rightX, bottomY, topY, scale) {
       scale
     );
     ctx.moveTo(tmpCoordinates.x, tmpCoordinates.y);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#ff0000";
     ctx.lineTo(newCoordinates.x, newCoordinates.y);
 
     // console.log(x);

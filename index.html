@@ -17,11 +17,44 @@
     <title>Graphics</title>
   </head>
   <body>
-    <canvas
-      id="canvas"
-      width="150"
-      height="150"
-    ></canvas>
+    <div class="main">
+      <div id="aside">
+        <div id="input-form">
+          <!-- <div id="title">Input coefs</div> -->
+          <input
+            type="text"
+            id="input_a"
+            placeholder="Input a"
+          />
+          <!-- <span id="span_b">b:</span> -->
+          <input
+            type="text"
+            id="input_b"
+            placeholder="Input b"
+          />
+
+          <!-- <span id="span_c">c:</span> -->
+          <input
+            type="text"
+            id="input_c"
+            placeholder="Input c"
+          />
+          <button id="submit-button">Submit</button>
+          <div id="roots"></div>
+          <button id="random-button">Use random roots</button>
+        </div>
+      </div>
+
+      <div id="canvas_wrapper">
+        <canvas
+          id="canvas"
+          width="150"
+          height="150"
+        ></canvas>
+      </div>
+    </div>
+
+    <!-- <script></script> -->
     <script src="/scripts/main.js"></script>
   </body>
 </html>
